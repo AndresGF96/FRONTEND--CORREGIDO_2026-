@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col s12 m5">
+        <div class="card">
+            <div class="card-content">
+                <form #productoForm="ngForm" (ngSubmit)="addProducto(productoForm)">
+                    <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProducto._id">
+                    
+                    <div class="input-field">
+                        <input type="text" name="nombre" #name="ngModel" [(ngModel)]="productoService.selectedProducto.nombre" placeholder="Nombre del Producto">
+                    </div>
+                    <div class="input-field">
+                        <input type="number" name="precio" #name="ngModel" [(ngModel)]="productoService.selectedProducto.precio" placeholder="Precio">
+                    </div>
+                    <div class="input-field">
+                        <input type="number" name="stock" #name="ngModel" [(ngModel)]="productoService.selectedProducto.stock" placeholder="Stock">
+                    </div>
+
+                    <div class="card-action">
+                        <button class="btn blue darken-4">Guardar</button>
+                        <button class="btn right grey" (click)="resetForm(productoForm)">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m7">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of productoService.productos">
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.precio | currency }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>
+                        <a (click)="editProducto(producto)" class="btn btn-small blue"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteProducto(producto._id)" class="btn btn-small red" style="margin-left: 5px;"><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div *ngIf="!isLoggedIn" class="container" style="margin-top: 100px;">
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card z-depth-3">
+        <div class="card-content center-align">
+          <i class="material-icons large blue-text text-darken-4">account_circle</i>
+          <span class="card-title"><b>INICIO DE SESIÓN</b></span>
+          
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" name="email" ngModel required placeholder="Correo Electrónico">
+            </div>
+            
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input type="password" name="password" ngModel required placeholder="Contraseña">
+            </div>
+
+            <div class="card-action">
+              <button class="btn-large blue darken-4 waves-effect waves-light" style="width: 100%;">
+                INGRESAR AL SISTEMA
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoggedIn">
+  <nav class="nav-extended blue darken-4">
+    <div class="nav-wrapper container">
+      <a class="brand-logo">SISTEMA INTEGRAL</a>
+      <ul id="nav-mobile" class="right">
+        <li>
+          <a (click)="logout()" class="waves-effect waves-light btn red darken-2">
+            <i class="material-icons left">exit_to_app</i>Cerrar Sesión
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="nav-content container">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a routerLink="/usuarios" routerLinkActive="active">Usuarios</a></li>
+        <li class="tab"><a routerLink="/empleados" routerLinkActive="active">Empleados</a></li>
+        <li class="tab"><a routerLink="/productos" routerLinkActive="active">Productos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 20px;">
+    <router-outlet></router-outlet>
+  </div>
+</div>
